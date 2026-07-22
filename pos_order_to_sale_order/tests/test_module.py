@@ -22,7 +22,7 @@ class TestUi(TestPointOfSaleHttpCommon):
             }
         )
 
-    def test_pos_order_to_sale_order(self):
+    def _prepare_pos_for_tour(self):
         self.main_pos_config.with_user(self.pos_user).open_ui()
 
         # Make the test compatible with pos_minimize_menu
@@ -34,26 +34,7 @@ class TestUi(TestPointOfSaleHttpCommon):
                 ]
             )
 
-        before_orders = self.env["sale.order"].search(
-            [("partner_id", "=", self.pos_partner.id)],
-            order="id",
-        )
-
-        self.start_tour(
-            f"/pos/ui/{self.main_pos_config.id}",
-            "PosOrderToSaleOrderTour",
-            login="accountman",
-        )
-
-        after_orders = self.env["sale.order"].search(
-            [("partner_id", "=", self.pos_partner.id)],
-            order="id",
-        )
-
-        self.assertEqual(len(before_orders) + 1, len(after_orders))
-
-        order = after_orders[-1]
-
+    def _assert_invoiced_sale_order(self, order):
         self.assertAlmostEqual(
             order.amount_total,
             5.18,
@@ -79,3 +60,48 @@ class TestUi(TestPointOfSaleHttpCommon):
             order.order_line[1].name,
             "'Product Note' must be in the second sale order line description",
         )
+
+    def test_pos_order_to_sale_order(self):
+        self._prepare_pos_for_tour()
+
+        before_orders = self.env["sale.order"].search(
+            [("partner_id", "=", self.pos_partner.id)],
+            order="id",
+        )
+
+        self.start_tour(
+            f"/pos/ui/{self.main_pos_config.id}",
+            "PosOrderToSaleOrderTour",
+            login="accountman",
+        )
+
+        after_orders = self.env["sale.order"].search(
+            [("partner_id", "=", self.pos_partner.id)],
+            order="id",
+        )
+
+        self.assertEqual(len(before_orders) + 1, len(after_orders))
+        self._assert_invoiced_sale_order(after_orders[-1])
+
+    def test_pos_order_to_sale_order_one_shot(self):
+        self.main_pos_config.iface_create_sale_order_default = "invoiced"
+        self._prepare_pos_for_tour()
+
+        before_orders = self.env["sale.order"].search(
+            [("partner_id", "=", self.pos_partner.id)],
+            order="id",
+        )
+
+        self.start_tour(
+            f"/pos/ui/{self.main_pos_config.id}",
+            "PosOrderToSaleOrderOneShotTour",
+            login="accountman",
+        )
+
+        after_orders = self.env["sale.order"].search(
+            [("partner_id", "=", self.pos_partner.id)],
+            order="id",
+        )
+
+        self.assertEqual(len(before_orders) + 1, len(after_orders))
+        self._assert_invoiced_sale_order(after_orders[-1])

@@ -2,6 +2,7 @@
 
 import {Component} from "@odoo/owl";
 import {usePos} from "@point_of_sale/app/hooks/pos_hook";
+import {createSaleOrderFromPos} from "@pos_order_to_sale_order/utils/create_sale_order_from_pos.esm";
 import {Dialog} from "@web/core/dialog/dialog";
 import {useService} from "@web/core/utils/hooks";
 
@@ -34,28 +35,7 @@ export class CreateOrderPopup extends Component {
     }
 
     async _actionCreateSaleOrder(order_state) {
-        // Create Sale Order
-        await this._createSaleOrder(order_state);
-
-        // Delete current order
-        const current_order = this.pos.getOrder();
-        this.pos.removeOrder(current_order);
-        this.pos.addNewOrder();
-
-        // Close popup
+        await createSaleOrderFromPos(this.pos, this.orm, this.ui, order_state);
         return this.props.close();
-    }
-
-    async _createSaleOrder(order_state) {
-        const current_order = this.pos.getOrder();
-        this.ui.block();
-        try {
-            return await this.orm.call("sale.order", "create_order_from_pos", [
-                current_order.serializeForORM({orm: true}),
-                order_state,
-            ]);
-        } finally {
-            this.ui.unblock();
-        }
     }
 }

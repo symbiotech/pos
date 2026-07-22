@@ -4,7 +4,7 @@
 
 {
     "name": "PoS Order To Sale Order",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.1.0",
     "author": "GRAP,Odoo Community Association (OCA)",
     "category": "Point Of Sale",
     "license": "AGPL-3",
@@ -15,6 +15,7 @@
     "data": ["views/view_res_config_settings.xml"],
     "assets": {
         "point_of_sale._assets_pos": [
+            "pos_order_to_sale_order/static/src/utils/create_sale_order_from_pos.esm.js",
             "pos_order_to_sale_order/static/src/components/control_buttons/control_buttons.esm.js",
             "pos_order_to_sale_order/static/src/components/control_buttons/control_buttons.xml",
             "pos_order_to_sale_order/static/src/components/create_order_button/create_order_button.esm.js",

@@ -21,6 +21,13 @@
                     <setting string="Create Invoiced Sale Orders">
                         <field name="pos_iface_create_invoiced_sale_order" />
                     </setting>
+
+                    <setting
+                        string="Default Sale Order Creation"
+                        help="When set to a specific state, Create Order creates that Sale Order immediately. Ask keeps the choice popup."
+                    >
+                        <field name="pos_iface_create_sale_order_default" />
+                    </setting>
                 </block>
             </xpath>
         </field>

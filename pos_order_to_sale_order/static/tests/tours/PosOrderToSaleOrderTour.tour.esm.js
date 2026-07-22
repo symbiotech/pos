@@ -26,3 +26,18 @@ registry.category("web_tour.tours").add("PosOrderToSaleOrderTour", {
             ProductScreen.closePos(),
         ].flat(),
 });
+
+registry.category("web_tour.tours").add("PosOrderToSaleOrderOneShotTour", {
+    steps: () =>
+        [
+            Chrome.startPoS(),
+            Dialog.confirm("Open Register"),
+            ProductScreen.addOrderline("Whiteboard Pen", "1"),
+            ProductScreen.addOrderline("Wall Shelf Unit", "1"),
+            ProductScreen.addCustomerNote("Product Note"),
+            ProductScreen.clickPartnerButton(),
+            ProductScreen.clickCustomer("Pos Partner"),
+            PosOrderToSaleOrderScreen.clickCreateOrderButton(),
+            ProductScreen.closePos(),
+        ].flat(),
+});

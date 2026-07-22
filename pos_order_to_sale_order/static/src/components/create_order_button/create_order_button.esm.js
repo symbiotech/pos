@@ -3,6 +3,10 @@
 import {Component} from "@odoo/owl";
 import {usePos} from "@point_of_sale/app/hooks/pos_hook";
 import {CreateOrderPopup} from "@pos_order_to_sale_order/components/create_order_popup/create_order_popup.esm";
+import {
+    createSaleOrderFromPos,
+    getDefaultCreateSaleOrderState,
+} from "@pos_order_to_sale_order/utils/create_sale_order_from_pos.esm";
 import {useService} from "@web/core/utils/hooks";
 
 export class CreateOrderButton extends Component {
@@ -10,6 +14,8 @@ export class CreateOrderButton extends Component {
     setup() {
         this.pos = usePos();
         this.dialog = useService("dialog");
+        this.orm = useService("orm");
+        this.ui = useService("ui");
     }
 
     isEnabled() {
@@ -21,7 +27,12 @@ export class CreateOrderButton extends Component {
         );
     }
 
-    onClick() {
+    async onClick() {
+        const orderState = getDefaultCreateSaleOrderState(this.pos.config);
+        if (orderState) {
+            await createSaleOrderFromPos(this.pos, this.orm, this.ui, orderState);
+            return;
+        }
         this.dialog.add(CreateOrderPopup);
     }
 }
