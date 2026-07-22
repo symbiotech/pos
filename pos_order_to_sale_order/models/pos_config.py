@@ -40,19 +40,19 @@ class PosConfig(models.Model):
         string="Create Delivered Sale Orders",
         default=True,
         help="If checked, the cashier will have the possibility to create"
-        " a confirmed sale Order, based on the current draft PoS Order.\n"
-        " the according picking will be marked as delivered. Only invoices"
-        " process will be possible.",
+        " a confirmed Sale Order, based on the current draft PoS Order.\n"
+        "The corresponding picking will be marked as delivered. Only invoice"
+        " processing will be possible.",
     )
 
     iface_create_invoiced_sale_order = fields.Boolean(
         string="Create Invoiced Sale Orders",
         default=True,
         help="If checked, the cashier will have the possibility to create"
-        " a confirmed sale Order, based on the current draft PoS Order.\n"
-        " the according picking will be marked as delivered.\n"
-        " The Invoice will be generated and confirm.\n"
-        " Only invoice payment process will be possible.",
+        " a confirmed Sale Order, based on the current draft PoS Order.\n"
+        "The corresponding picking will be marked as delivered.\n"
+        "The invoice will be generated and confirmed.\n"
+        "Only invoice payment processing will be possible.",
     )
 
     iface_create_sale_order_default = fields.Selection(

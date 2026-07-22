@@ -64,19 +64,20 @@ class SaleOrder(models.Model):
             )
 
     @api.model
-    def _prepare_from_pos(self, order_data, line_vals_list):
+    def _prepare_from_pos(self, order_data, line_vals_list, default_user=None):
         session = self.env["pos.session"].browse(order_data["session_id"])
         SaleOrderLine = self.env["sale.order.line"]
         order_lines = [
             Command.create(SaleOrderLine._prepare_from_pos(sequence, line_vals))
             for sequence, line_vals in enumerate(line_vals_list, start=1)
         ]
+        user = default_user or self.env.user
         return {
             "partner_id": order_data["partner_id"],
             "pos_session_id": session.id,
             "origin": self.env._("Point of Sale %s", session.name),
             "client_order_ref": order_data.get("name") or session.name,
-            "user_id": order_data.get("user_id") or self.env.user.id,
+            "user_id": order_data.get("user_id") or user.id,
             "pricelist_id": order_data.get("pricelist_id") or False,
             "fiscal_position_id": order_data.get("fiscal_position_id") or False,
             "order_line": order_lines,
@@ -120,8 +121,11 @@ class SaleOrder(models.Model):
             raise UserError(self.env._("No order lines to create a sale order from."))
 
         # POS cashiers may not have Sales ACLs.
+        cashier = self.env.user
         self = self.sudo()
-        order_vals = self._prepare_from_pos(order_data, line_vals_list)
+        order_vals = self._prepare_from_pos(
+            order_data, line_vals_list, default_user=cashier
+        )
         sale_order = self.with_context(pos_order_lines_data=line_vals_list).create(
             order_vals
         )
