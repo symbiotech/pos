@@ -24,6 +24,7 @@ class TestUi(TestPointOfSaleHttpCommon):
         cls.customer_account_payment_method = cls.env["pos.payment.method"].create(
             {
                 "name": "Customer Account",
+                "type": "pay_later",
                 "split_transactions": True,
             }
         )
