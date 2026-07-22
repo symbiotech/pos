@@ -4,7 +4,7 @@
 
 {
     "name": "PoS Order To Sale Order",
-    "version": "19.0.1.2.0",
+    "version": "19.0.1.3.0",
     "author": "GRAP,Odoo Community Association (OCA)",
     "category": "Point Of Sale",
     "license": "AGPL-3",
@@ -12,7 +12,10 @@
     "maintainers": ["legalsylvain"],
     "development_status": "Production/Stable",
     "website": "https://github.com/OCA/pos",
-    "data": ["views/view_res_config_settings.xml"],
+    "data": [
+        "views/view_res_config_settings.xml",
+        "views/view_sale_order.xml",
+    ],
     "assets": {
         "point_of_sale._assets_pos": [
             "pos_order_to_sale_order/static/src/utils/create_sale_order_from_pos.esm.js",

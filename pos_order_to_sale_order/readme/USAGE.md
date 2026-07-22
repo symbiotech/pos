@@ -41,3 +41,12 @@ When **Create Sale Order on Customer Account Validate** is enabled and
 - A sale order is created in the default state and the receipt screen
   is shown (as for a normal PoS payment)
 - No Point of Sale order is saved
+
+## Finding sale orders created from PoS
+
+On Sales → Orders / Quotations:
+
+- Use the **From Point of Sale** filter
+- Optionally show the **PoS Session** column (list optional columns)
+- On the order form (Other Info → Tracking), **PoS Session** is shown
+  when set; **Source Document** also mentions the PoS session

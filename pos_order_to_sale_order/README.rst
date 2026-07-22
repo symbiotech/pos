@@ -123,6 +123,16 @@ When **Create Sale Order on Customer Account Validate** is enabled and
   shown (as for a normal PoS payment)
 - No Point of Sale order is saved
 
+Finding sale orders created from PoS
+------------------------------------
+
+On Sales → Orders / Quotations:
+
+- Use the **From Point of Sale** filter
+- Optionally show the **PoS Session** column (list optional columns)
+- On the order form (Other Info → Tracking), **PoS Session** is shown
+  when set; **Source Document** also mentions the PoS session
+
 .. |image1| image:: https://raw.githubusercontent.com/OCA/pos/19.0/pos_order_to_sale_order/static/description/pos_frontend_button.png
 .. |image2| image:: https://raw.githubusercontent.com/OCA/pos/19.0/pos_order_to_sale_order/static/description/pos_frontend_popup.png
 

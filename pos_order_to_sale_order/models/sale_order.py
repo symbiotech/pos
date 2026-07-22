@@ -18,8 +18,10 @@ class SaleOrder(models.Model):
 
     pos_session_id = fields.Many2one(
         comodel_name="pos.session",
-        string="Pos Session",
+        string="PoS Session",
         readonly=True,
+        index=True,
+        copy=False,
     )
 
     @api.model
