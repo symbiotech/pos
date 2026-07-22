@@ -27,10 +27,9 @@
                     t-if="pos.config.iface_create_delivered_sale_order"
                     t-on-click="createDeliveredSaleOrder"
                 >
-                    <i class="fa fa-file-text-o" aria-hidden="true" /> + <i
-                    class="fa fa-shopping-cart"
-                    aria-hidden="true"
-                />
+                    <i class="fa fa-file-text-o" aria-hidden="true" />
+                    <span aria-hidden="true"> + </span>
+                    <i class="fa fa-shopping-cart" aria-hidden="true" />
                     Create Delivered Sale Order
                 </button>
                 <button
@@ -38,10 +37,11 @@
                     t-if="pos.config.iface_create_invoiced_sale_order"
                     t-on-click="createInvoicedSaleOrder"
                 >
-                    <i class="fa fa-file-text-o" aria-hidden="true" /> + <i
-                    class="fa fa-shopping-cart"
-                    aria-hidden="true"
-                /> + <i class="fa fa-usd" aria-hidden="true" />
+                    <i class="fa fa-file-text-o" aria-hidden="true" />
+                    <span aria-hidden="true"> + </span>
+                    <i class="fa fa-shopping-cart" aria-hidden="true" />
+                    <span aria-hidden="true"> + </span>
+                    <i class="fa fa-usd" aria-hidden="true" />
                     Create Invoiced Sale Order
                 </button>
             </div>
