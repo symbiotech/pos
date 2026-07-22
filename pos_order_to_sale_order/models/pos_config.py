@@ -2,7 +2,7 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 _CREATE_SALE_ORDER_DEFAULT_FLAGS = {
@@ -117,7 +117,7 @@ class PosConfig(models.Model):
             )
             if flag and not config[flag]:
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "The default Sale Order Creation must match an enabled"
                         " creation option, or be set to Ask."
                     )

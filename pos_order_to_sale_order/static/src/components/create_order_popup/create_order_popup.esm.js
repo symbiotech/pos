@@ -1,9 +1,9 @@
 /** @odoo-module **/
 
 import {Component} from "@odoo/owl";
-import {usePos} from "@point_of_sale/app/hooks/pos_hook";
-import {createSaleOrderFromPos} from "@pos_order_to_sale_order/utils/create_sale_order_from_pos.esm";
 import {Dialog} from "@web/core/dialog/dialog";
+import {createSaleOrderFromPos} from "@pos_order_to_sale_order/utils/create_sale_order_from_pos.esm";
+import {usePos} from "@point_of_sale/app/hooks/pos_hook";
 import {useService} from "@web/core/utils/hooks";
 
 export class CreateOrderPopup extends Component {
