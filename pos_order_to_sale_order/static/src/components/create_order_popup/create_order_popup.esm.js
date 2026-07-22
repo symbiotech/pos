@@ -34,8 +34,8 @@ export class CreateOrderPopup extends Component {
         await this._actionCreateSaleOrder("invoiced");
     }
 
-    async _actionCreateSaleOrder(order_state) {
-        await createSaleOrderFromPos(this.pos, this.orm, this.ui, order_state);
+    async _actionCreateSaleOrder(orderState) {
+        await createSaleOrderFromPos(this.pos, this.orm, this.ui, orderState);
         return this.props.close();
     }
 }

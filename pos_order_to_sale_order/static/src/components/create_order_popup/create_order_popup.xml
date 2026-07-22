@@ -5,7 +5,7 @@
         <Dialog title.translate="Create Sale Order">
             <div class="control-buttons control-buttons-modal d-grid gap-2 mt-2">
                 <button
-                    class="btn btn-secondary btn-lg py-5 o_create_order_button"
+                    class="btn btn-secondary btn-lg py-5 button-draft-sale-order"
                     t-if="pos.config.iface_create_draft_sale_order"
                     t-on-click="createDraftSaleOrder"
                 >

@@ -75,10 +75,10 @@ class SaleOrder(models.Model):
             "partner_id": order_data["partner_id"],
             "pos_session_id": session.id,
             "origin": self.env._("Point of Sale %s", session.name),
-            "client_order_ref": order_data["name"],
+            "client_order_ref": order_data.get("name") or session.name,
             "user_id": order_data.get("user_id") or self.env.user.id,
-            "pricelist_id": order_data["pricelist_id"],
-            "fiscal_position_id": order_data["fiscal_position_id"],
+            "pricelist_id": order_data.get("pricelist_id") or False,
+            "fiscal_position_id": order_data.get("fiscal_position_id") or False,
             "order_line": order_lines,
         }
 
