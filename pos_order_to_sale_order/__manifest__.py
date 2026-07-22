@@ -4,7 +4,7 @@
 
 {
     "name": "PoS Order To Sale Order",
-    "version": "19.0.1.4.0",
+    "version": "19.0.1.4.1",
     "author": "GRAP,Odoo Community Association (OCA)",
     "category": "Point Of Sale",
     "license": "AGPL-3",
@@ -21,6 +21,8 @@
             "pos_order_to_sale_order/static/src/utils/create_sale_order_from_pos.esm.js",
             "pos_order_to_sale_order/static/src/app/utils/order_payment_validation.esm.js",
             "pos_order_to_sale_order/static/src/app/services/pos_store.esm.js",
+            "pos_order_to_sale_order/static/src/app/screens/receipt_screen/receipt_screen.esm.js",
+            "pos_order_to_sale_order/static/src/app/screens/receipt_screen/receipt_screen.xml",
             "pos_order_to_sale_order/static/src/components/control_buttons/control_buttons.esm.js",
             "pos_order_to_sale_order/static/src/components/control_buttons/control_buttons.xml",
             "pos_order_to_sale_order/static/src/components/create_order_button/create_order_button.esm.js",

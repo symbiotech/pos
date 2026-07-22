@@ -45,6 +45,7 @@ and **Default Sale Order Creation** is a concrete state:
 - A sale order is created in the default state and the receipt screen
   is shown (as for a normal PoS payment)
 - No Point of Sale order is saved
+- Receipt email / SMS is hidden (there is no synced PoS order to send)
 
 ## Finding sale orders created from PoS
 
