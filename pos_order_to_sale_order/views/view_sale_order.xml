@@ -46,6 +46,11 @@
         <field name="arch" type="xml">
             <field name="origin" position="after">
                 <field name="pos_session_id" invisible="not pos_session_id" />
+                <field
+                    name="pos_order_uuid"
+                    groups="base.group_no_one"
+                    invisible="not pos_order_uuid"
+                />
             </field>
         </field>
     </record>

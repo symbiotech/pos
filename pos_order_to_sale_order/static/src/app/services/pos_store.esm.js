@@ -27,4 +27,29 @@ patch(PosStore.prototype, {
         }
         return super.addPendingOrder(filteredIds, remove);
     },
+
+    /**
+     * Remove a converted order from IndexedDB but keep it in memory for the
+     * receipt screen. Prevents a page reload from restoring a paid draft that
+     * would sync as a real pos.order after the sale order already exists.
+     */
+    forgetConvertedOrderFromIndexedDB(order) {
+        if (!order?.uuid || !this.data?.indexedDB?.delete) {
+            return;
+        }
+        const toDelete = [["pos.order", order.uuid]];
+        for (const line of order.lines || []) {
+            if (line?.uuid) {
+                toDelete.push(["pos.order.line", line.uuid]);
+            }
+        }
+        for (const payment of order.payment_ids || []) {
+            if (payment?.uuid) {
+                toDelete.push(["pos.payment", payment.uuid]);
+            }
+        }
+        for (const [model, uuid] of toDelete) {
+            this.data.indexedDB.delete(model, [uuid]);
+        }
+    },
 });

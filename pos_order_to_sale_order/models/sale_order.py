@@ -2,6 +2,8 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from psycopg2.errors import UniqueViolation
+
 from odoo import Command, api, fields, models
 from odoo.exceptions import AccessError, UserError
 
@@ -22,6 +24,19 @@ class SaleOrder(models.Model):
         readonly=True,
         index=True,
         copy=False,
+    )
+    pos_order_uuid = fields.Char(
+        string="PoS Order UUID",
+        readonly=True,
+        index=True,
+        copy=False,
+        help="Technical link to the Point of Sale order that created this"
+        " sale order. Used to avoid creating duplicates on retry.",
+    )
+
+    _pos_order_uuid_uniq = models.Constraint(
+        "UNIQUE(pos_order_uuid)",
+        "A sale order already exists for this Point of Sale order.",
     )
 
     @api.model
@@ -77,6 +92,7 @@ class SaleOrder(models.Model):
         return {
             "partner_id": order_data["partner_id"],
             "pos_session_id": session.id,
+            "pos_order_uuid": order_data.get("uuid") or False,
             "origin": self.env._("Point of Sale %s", session.name),
             "client_order_ref": order_data.get("name") or session.name,
             "user_id": order_data.get("user_id") or user.id,
@@ -84,6 +100,12 @@ class SaleOrder(models.Model):
             "fiscal_position_id": order_data.get("fiscal_position_id") or False,
             "order_line": order_lines,
         }
+
+    @api.model
+    def _find_sale_order_from_pos_uuid(self, pos_order_uuid):
+        if not pos_order_uuid:
+            return self.browse()
+        return self.search([("pos_order_uuid", "=", pos_order_uuid)], limit=1)
 
     def _validate_pickings_from_pos(self):
         """Mark related pickings done, handling validate wizards when needed."""
@@ -129,23 +151,36 @@ class SaleOrder(models.Model):
         # POS cashiers may not have Sales ACLs.
         cashier = self.env.user
         self = self.sudo()
+
+        # Idempotent: retries / double-Validate reuse the same sale order.
+        existing = self._find_sale_order_from_pos_uuid(order_data.get("uuid"))
+        if existing:
+            return {"sale_order_id": existing.id}
+
         order_vals = self._prepare_from_pos(
             order_data, line_vals_list, default_user=cashier
         )
-        sale_order = self.with_context(pos_order_lines_data=line_vals_list).create(
-            order_vals
-        )
-        sale_order._recompute_taxes()
+        try:
+            with self.env.cr.savepoint():
+                sale_order = self.with_context(
+                    pos_order_lines_data=line_vals_list
+                ).create(order_vals)
+                sale_order._recompute_taxes()
 
-        if action in ["confirmed", "delivered", "invoiced"]:
-            sale_order.action_confirm()
+                if action in ["confirmed", "delivered", "invoiced"]:
+                    sale_order.action_confirm()
 
-        if action in ["delivered", "invoiced"]:
-            sale_order._validate_pickings_from_pos()
+                if action in ["delivered", "invoiced"]:
+                    sale_order._validate_pickings_from_pos()
 
-        if action == "invoiced":
-            invoices = sale_order._create_invoices()
-            invoices.action_post()
+                if action == "invoiced":
+                    invoices = sale_order._create_invoices()
+                    invoices.action_post()
+        except UniqueViolation:
+            existing = self._find_sale_order_from_pos_uuid(order_data.get("uuid"))
+            if existing:
+                return {"sale_order_id": existing.id}
+            raise
 
         return {
             "sale_order_id": sale_order.id,
