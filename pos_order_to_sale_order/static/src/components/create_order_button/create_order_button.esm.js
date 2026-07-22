@@ -22,7 +22,7 @@ export class CreateOrderButton extends Component {
     }
 
     isVisible() {
-        // Quick Validate path replaces Actions → Create Order.
+        // Customer Account payment path replaces Actions → Create Order.
         return !this.pos.config.iface_create_sale_order_on_validate;
     }
 

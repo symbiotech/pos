@@ -69,16 +69,16 @@ class PosConfig(models.Model):
         help="If set to a specific state, the Create Order button creates a"
         " Sale Order in that state without asking. If set to Ask, the cashier"
         " chooses the state in a popup.\n"
-        "When Create Sale Order on Customer Account Validate is enabled,"
-        " Ask is not allowed and Validate uses this default state.",
+        "When Create Sale Order when paying with Customer Account is enabled,"
+        " Ask is not allowed and payment uses this default state.",
     )
 
     iface_create_sale_order_on_validate = fields.Boolean(
-        string="Create Sale Order on Customer Account Validate",
+        string="Create Sale Order when paying with Customer Account",
         default=False,
-        help="If checked, paying fully with Customer Account and clicking"
-        " Validate creates a Sale Order in the Default Sale Order Creation"
-        " state and shows a receipt. No Point of Sale order is saved."
+        help="If checked, paying fully with Customer Account creates a Sale"
+        " Order in the Default Sale Order Creation state and shows a"
+        " receipt. No Point of Sale order is saved."
         " The Actions Create Order button is hidden."
         " Default Sale Order Creation must not be Ask.",
     )
@@ -157,6 +157,7 @@ class PosConfig(models.Model):
                 raise ValidationError(
                     self.env._(
                         "Default Sale Order Creation cannot be Ask when Create"
-                        " Sale Order on Customer Account Validate is enabled."
+                        " Sale Order when paying with Customer Account is"
+                        " enabled."
                     )
                 )

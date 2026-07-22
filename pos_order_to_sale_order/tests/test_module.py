@@ -147,6 +147,6 @@ class TestUi(TestPointOfSaleHttpCommon):
         self.assertEqual(
             before_pos_orders,
             after_pos_orders,
-            "Customer Account Validate must not create a PoS order",
+            "Paying with Customer Account must not create a PoS order",
         )
         self._assert_invoiced_sale_order(after_orders[-1])

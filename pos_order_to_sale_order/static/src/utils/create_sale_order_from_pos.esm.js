@@ -20,7 +20,7 @@ export function getDefaultCreateSaleOrderState(config) {
 }
 
 /**
- * Whether Validate with Customer Account should create a sale order.
+ * Whether paying fully with Customer Account should create a sale order.
  */
 export function shouldCreateSaleOrderOnValidate(config, order) {
     if (

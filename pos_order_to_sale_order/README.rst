@@ -65,11 +65,11 @@ Configuration
   - **Draft** / **Confirmed** / **Delivered** / **Invoiced**: Create
     Order creates that sale order immediately without a popup
 
-- Optionally enable **Create Sale Order on Customer Account Validate**:
-  pay fully with Customer Account and click Validate to create a sale
-  order in the Default state (must not be Ask) and show a receipt. No
-  Point of Sale order is saved. The Actions → **Create Order** button is
-  hidden so staff only use Validate.
+- Optionally enable **Create Sale Order when paying with Customer
+  Account**: pay fully with Customer Account to create a sale order in
+  the Default state (must not be Ask) and show a receipt. No Point of
+  Sale order is saved. The Actions → **Create Order** button is hidden
+  so staff only use Customer Account payment.
 
 |image_setting|
 
@@ -81,8 +81,8 @@ Usage
 Actions → Create Order
 ----------------------
 
-This path is available when **Create Sale Order on Customer Account
-Validate** is disabled.
+This path is available when **Create Sale Order when paying with
+Customer Account** is disabled.
 
 - Open your Point of Sale
 - Create a new order and select products
@@ -115,11 +115,11 @@ the PoS settings):
 
 |image2|
 
-Customer Account Validate (optional)
-------------------------------------
+Paying with Customer Account (optional)
+---------------------------------------
 
-When **Create Sale Order on Customer Account Validate** is enabled and
-**Default Sale Order Creation** is a concrete state:
+When **Create Sale Order when paying with Customer Account** is enabled
+and **Default Sale Order Creation** is a concrete state:
 
 - The Actions → **Create Order** button is hidden
 - Add products and select a customer

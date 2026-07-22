@@ -1,7 +1,7 @@
 ## Actions → Create Order
 
-This path is available when **Create Sale Order on Customer Account
-Validate** is disabled.
+This path is available when **Create Sale Order when paying with
+Customer Account** is disabled.
 
 - Open your Point of Sale
 - Create a new order and select products
@@ -34,10 +34,10 @@ the PoS settings):
 
 ![](../static/description/pos_frontend_popup.png)
 
-## Customer Account Validate (optional)
+## Paying with Customer Account (optional)
 
-When **Create Sale Order on Customer Account Validate** is enabled and
-**Default Sale Order Creation** is a concrete state:
+When **Create Sale Order when paying with Customer Account** is enabled
+and **Default Sale Order Creation** is a concrete state:
 
 - The Actions → **Create Order** button is hidden
 - Add products and select a customer
