@@ -4,7 +4,7 @@
 
 {
     "name": "PoS Order To Sale Order",
-    "version": "19.0.1.4.2",
+    "version": "19.0.1.5.0",
     "author": "GRAP,Odoo Community Association (OCA)",
     "category": "Point Of Sale",
     "license": "AGPL-3",
@@ -13,8 +13,10 @@
     "development_status": "Production/Stable",
     "website": "https://github.com/OCA/pos",
     "data": [
+        "security/ir.model.access.csv",
         "views/view_res_config_settings.xml",
         "views/view_sale_order.xml",
+        "views/view_pos_shop_sale_report.xml",
     ],
     "assets": {
         "point_of_sale._assets_pos": [

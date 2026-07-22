@@ -55,3 +55,10 @@ On Sales → Orders / Quotations:
 - Optionally show the **PoS Session** column (list optional columns)
 - On the order form (Other Info → Tracking), **PoS Session** is shown
   when set; **Source Document** also mentions the PoS session
+
+## Daily shop sales
+
+Point of Sale → Reporting → **Shop Sales (POS + Sale Orders)** shows
+paid PoS orders and sale orders created from PoS in one list (default
+filter: today). Use the pivot/graph views to total by day or source.
+Open a row to jump to the related PoS order or sale order.

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_pos_shop_sale_report_list" model="ir.ui.view">
+        <field name="name">pos.shop.sale.report.list</field>
+        <field name="model">pos.shop.sale.report</field>
+        <field name="arch" type="xml">
+            <list create="false" edit="false" delete="false">
+                <field name="date_order" />
+                <field name="source" />
+                <field name="name" />
+                <button
+                    name="action_open_document"
+                    type="object"
+                    string="Open"
+                    icon="fa-external-link"
+                    title="Open Document"
+                />
+                <field name="partner_id" />
+                <field name="user_id" optional="show" />
+                <field name="pos_session_id" optional="show" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="currency_id" column_invisible="1" />
+                <field name="amount_total" sum="Total" />
+                <field name="pos_order_id" optional="hide" />
+                <field name="sale_order_id" optional="hide" />
+            </list>
+        </field>
+    </record>
+
+    <record id="view_pos_shop_sale_report_search" model="ir.ui.view">
+        <field name="name">pos.shop.sale.report.search</field>
+        <field name="model">pos.shop.sale.report</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="partner_id" />
+                <field name="user_id" />
+                <field name="pos_session_id" />
+                <field name="source" />
+                <filter
+                    name="filter_today"
+                    string="Today"
+                    domain="[('date', '=', context_today())]"
+                />
+                <separator />
+                <filter
+                    name="filter_source_pos"
+                    string="Point of Sale"
+                    domain="[('source', '=', 'pos')]"
+                />
+                <filter
+                    name="filter_source_sale"
+                    string="Sale Order"
+                    domain="[('source', '=', 'sale')]"
+                />
+                <separator />
+                <group>
+                    <filter
+                        name="group_date"
+                        string="Date"
+                        context="{'group_by': 'date'}"
+                    />
+                    <filter
+                        name="group_source"
+                        string="Source"
+                        context="{'group_by': 'source'}"
+                    />
+                    <filter
+                        name="group_partner"
+                        string="Customer"
+                        context="{'group_by': 'partner_id'}"
+                    />
+                    <filter
+                        name="group_session"
+                        string="PoS Session"
+                        context="{'group_by': 'pos_session_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_pos_shop_sale_report_pivot" model="ir.ui.view">
+        <field name="name">pos.shop.sale.report.pivot</field>
+        <field name="model">pos.shop.sale.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Shop Sales" sample="1">
+                <field name="date" type="row" />
+                <field name="source" type="col" />
+                <field name="amount_total" type="measure" />
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_pos_shop_sale_report_graph" model="ir.ui.view">
+        <field name="name">pos.shop.sale.report.graph</field>
+        <field name="model">pos.shop.sale.report</field>
+        <field name="arch" type="xml">
+            <graph string="Shop Sales" sample="1" type="bar">
+                <field name="date" />
+                <field name="amount_total" type="measure" />
+                <field name="source" />
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_pos_shop_sale_report" model="ir.actions.act_window">
+        <field name="name">Shop Sales (POS + Sale Orders)</field>
+        <field name="res_model">pos.shop.sale.report</field>
+        <field name="view_mode">list,pivot,graph</field>
+        <field name="search_view_id" ref="view_pos_shop_sale_report_search" />
+        <field name="context">{'search_default_filter_today': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No shop sales for the selected period.
+            </p>
+            <p>
+                This report combines paid Point of Sale orders and sale
+                orders created from the Point of Sale.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_pos_shop_sale_report"
+        name="Shop Sales (POS + Sale Orders)"
+        parent="point_of_sale.menu_point_rep"
+        action="action_pos_shop_sale_report"
+        sequence="50"
+        groups="point_of_sale.group_pos_user,sales_team.group_sale_salesman"
+    />
+</odoo>
