@@ -5,13 +5,26 @@ import {patch} from "@web/core/utils/patch";
 
 patch(PosStore.prototype, {
     /**
-     * Drop locally converted sale-order drafts without syncing a POS order.
+     * Finish core receipt navigation first, then drop the local draft.
+     * Deleting before super.orderDone would break order.setScreenData().
      */
     orderDone(order) {
-        if (order?.uiState?.saleOrderConverted && !order.isSynced) {
+        const converted = order?.uiState?.saleOrderConverted && !order.isSynced;
+        const result = super.orderDone(...arguments);
+        if (converted) {
             this.data.localDeleteCascade(order);
         }
-        return super.orderDone(...arguments);
+        return result;
+    },
+
+    /**
+     * Converted orders have no server pos.order; editing payments is invalid.
+     */
+    canEditPayment(order) {
+        if (order?.uiState?.saleOrderConverted) {
+            return false;
+        }
+        return super.canEditPayment(...arguments);
     },
 
     /**
