@@ -11,6 +11,9 @@ import {useService} from "@web/core/utils/hooks";
 
 export class CreateOrderButton extends Component {
     static template = "pos_order_to_sale_order.CreateOrderButton";
+    static props = {
+        close: {type: Function, optional: true},
+    };
     setup() {
         this.pos = usePos();
         this.dialog = useService("dialog");
@@ -27,10 +30,13 @@ export class CreateOrderButton extends Component {
         );
     }
 
-    async onClick() {
+    async onClick(ev) {
         const orderState = getDefaultCreateSaleOrderState(this.pos.config);
         if (orderState) {
+            // Keep Actions dialog mounted until create finishes (Dialog closes on click).
+            ev.stopPropagation();
             await createSaleOrderFromPos(this.pos, this.orm, this.ui, orderState);
+            this.props.close?.();
             return;
         }
         this.dialog.add(CreateOrderPopup);

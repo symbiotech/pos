@@ -6,7 +6,7 @@
         t-inherit-mode="extension"
     >
         <xpath expr="//t[@t-if='props.showRemainingButtons']/div" position="inside">
-            <CreateOrderButton />
+            <CreateOrderButton close="props.close" />
         </xpath>
     </t>
 </templates>

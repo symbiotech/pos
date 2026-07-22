@@ -38,6 +38,8 @@ registry.category("web_tour.tours").add("PosOrderToSaleOrderOneShotTour", {
             ProductScreen.clickPartnerButton(),
             ProductScreen.clickCustomer("Pos Partner"),
             PosOrderToSaleOrderScreen.clickCreateOrderButton(),
+            // Wait until one-shot creation replaces the PoS order.
+            ProductScreen.orderIsEmpty(),
             ProductScreen.closePos(),
         ].flat(),
 });
