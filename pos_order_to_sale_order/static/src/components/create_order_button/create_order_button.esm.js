@@ -21,9 +21,15 @@ export class CreateOrderButton extends Component {
         this.ui = useService("ui");
     }
 
+    isVisible() {
+        // Quick Validate path replaces Actions → Create Order.
+        return !this.pos.config.iface_create_sale_order_on_validate;
+    }
+
     isEnabled() {
         const pos = this.pos;
         return (
+            this.isVisible() &&
             pos.config.iface_create_sale_order &&
             this.pos.getOrder().getPartner() &&
             this.pos.getOrder().getOrderlines().length !== 0

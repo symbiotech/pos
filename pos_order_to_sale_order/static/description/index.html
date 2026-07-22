@@ -424,7 +424,8 @@ Order creates that sale order immediately without a popup</li>
 <li>Optionally enable <strong>Create Sale Order on Customer Account Validate</strong>:
 pay fully with Customer Account and click Validate to create a sale
 order in the Default state (must not be Ask) and show a receipt. No
-Point of Sale order is saved.</li>
+Point of Sale order is saved. The Actions → <strong>Create Order</strong> button is
+hidden so staff only use Validate.</li>
 </ul>
 <p><img alt="image_setting" src="https://raw.githubusercontent.com/OCA/pos/19.0/pos_order_to_sale_order/static/description/res_config_settings_form.png" /></p>
 </div>
@@ -432,6 +433,8 @@ Point of Sale order is saved.</li>
 <h2><a class="toc-backref" href="#toc-entry-2">Usage</a></h2>
 <div class="section" id="actions-create-order">
 <h3><a class="toc-backref" href="#toc-entry-3">Actions → Create Order</a></h3>
+<p>This path is available when <strong>Create Sale Order on Customer Account
+Validate</strong> is disabled.</p>
 <ul class="simple">
 <li>Open your Point of Sale</li>
 <li>Create a new order and select products</li>
@@ -468,6 +471,7 @@ invoice will be created and confirmed.</li>
 <p>When <strong>Create Sale Order on Customer Account Validate</strong> is enabled and
 <strong>Default Sale Order Creation</strong> is a concrete state:</p>
 <ul class="simple">
+<li>The Actions → <strong>Create Order</strong> button is hidden</li>
 <li>Add products and select a customer</li>
 <li>Go to Payment, choose <strong>Customer Account</strong>, then <strong>Validate</strong></li>
 <li>A sale order is created in the default state and the receipt screen is

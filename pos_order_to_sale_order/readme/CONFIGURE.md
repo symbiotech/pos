@@ -8,6 +8,7 @@
 - Optionally enable **Create Sale Order on Customer Account Validate**:
   pay fully with Customer Account and click Validate to create a sale
   order in the Default state (must not be Ask) and show a receipt.
-  No Point of Sale order is saved.
+  No Point of Sale order is saved. The Actions → **Create Order**
+  button is hidden so staff only use Validate.
 
 ![image_setting](../static/description/res_config_settings_form.png)

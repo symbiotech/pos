@@ -68,7 +68,8 @@ Configuration
 - Optionally enable **Create Sale Order on Customer Account Validate**:
   pay fully with Customer Account and click Validate to create a sale
   order in the Default state (must not be Ask) and show a receipt. No
-  Point of Sale order is saved.
+  Point of Sale order is saved. The Actions → **Create Order** button is
+  hidden so staff only use Validate.
 
 |image_setting|
 
@@ -79,6 +80,9 @@ Usage
 
 Actions → Create Order
 ----------------------
+
+This path is available when **Create Sale Order on Customer Account
+Validate** is disabled.
 
 - Open your Point of Sale
 - Create a new order and select products
@@ -117,6 +121,7 @@ Customer Account Validate (optional)
 When **Create Sale Order on Customer Account Validate** is enabled and
 **Default Sale Order Creation** is a concrete state:
 
+- The Actions → **Create Order** button is hidden
 - Add products and select a customer
 - Go to Payment, choose **Customer Account**, then **Validate**
 - A sale order is created in the default state and the receipt screen is

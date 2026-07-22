@@ -3,6 +3,7 @@
 
     <t t-name="pos_order_to_sale_order.CreateOrderButton" owl="1">
         <button
+            t-if="isVisible()"
             class="btn btn-secondary btn-lg py-5 o_create_order_button"
             t-on-click="onClick"
             t-att-disabled="!isEnabled()"

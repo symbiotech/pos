@@ -34,7 +34,7 @@
 
                     <setting
                         string="Create Sale Order on Customer Account Validate"
-                        help="Pay fully with Customer Account and Validate to create a Sale Order in the Default state and show a receipt. No Point of Sale order is saved."
+                        help="Pay fully with Customer Account and Validate to create a Sale Order in the Default state and show a receipt. No Point of Sale order is saved. Hides the Actions Create Order button."
                     >
                         <field name="pos_iface_create_sale_order_on_validate" />
                     </setting>

@@ -79,6 +79,7 @@ class PosConfig(models.Model):
         help="If checked, paying fully with Customer Account and clicking"
         " Validate creates a Sale Order in the Default Sale Order Creation"
         " state and shows a receipt. No Point of Sale order is saved."
+        " The Actions Create Order button is hidden."
         " Default Sale Order Creation must not be Ask.",
     )
 
