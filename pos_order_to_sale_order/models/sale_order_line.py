@@ -20,12 +20,14 @@ class SaleOrderLine(models.Model):
         }
 
     def _get_sale_order_line_multiline_description_sale(self):
+        self.ensure_one()
         res = super()._get_sale_order_line_multiline_description_sale()
 
         for sequence, line_data in enumerate(
             self.env.context.get("pos_order_lines_data", []), start=1
         ):
-            if line_data.get("customer_note", False) and self.sequence == sequence:
-                res += f"\n{line_data.get('customer_note')}"
+            customer_note = line_data.get("customer_note")
+            if customer_note and self.sequence == sequence:
+                res += f"\n{customer_note}"
 
         return res
