@@ -27,3 +27,7 @@ class ResConfigSettings(models.TransientModel):
     pos_iface_create_sale_order_default = fields.Selection(
         related="pos_config_id.iface_create_sale_order_default", readonly=False
     )
+
+    pos_iface_create_sale_order_on_validate = fields.Boolean(
+        related="pos_config_id.iface_create_sale_order_on_validate", readonly=False
+    )

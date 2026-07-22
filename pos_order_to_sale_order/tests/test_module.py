@@ -21,6 +21,12 @@ class TestUi(TestPointOfSaleHttpCommon):
                 "email": "let@it.be",
             }
         )
+        cls.customer_account_payment_method = cls.env["pos.payment.method"].create(
+            {
+                "name": "Customer Account",
+                "split_transactions": True,
+            }
+        )
 
     def _prepare_pos_for_tour(self):
         self.main_pos_config.with_user(self.pos_user).open_ui()
@@ -104,4 +110,42 @@ class TestUi(TestPointOfSaleHttpCommon):
         )
 
         self.assertEqual(len(before_orders) + 1, len(after_orders))
+        self._assert_invoiced_sale_order(after_orders[-1])
+
+    def test_pos_order_to_sale_order_validate(self):
+        self.main_pos_config.write(
+            {
+                "iface_create_sale_order_default": "invoiced",
+                "iface_create_sale_order_on_validate": True,
+                "payment_method_ids": [
+                    (4, self.customer_account_payment_method.id),
+                ],
+            }
+        )
+        self._prepare_pos_for_tour()
+
+        before_orders = self.env["sale.order"].search(
+            [("partner_id", "=", self.pos_partner.id)],
+            order="id",
+        )
+        before_pos_orders = self.env["pos.order"].search_count([])
+
+        self.start_tour(
+            f"/pos/ui/{self.main_pos_config.id}",
+            "PosOrderToSaleOrderValidateTour",
+            login="accountman",
+        )
+
+        after_orders = self.env["sale.order"].search(
+            [("partner_id", "=", self.pos_partner.id)],
+            order="id",
+        )
+        after_pos_orders = self.env["pos.order"].search_count([])
+
+        self.assertEqual(len(before_orders) + 1, len(after_orders))
+        self.assertEqual(
+            before_pos_orders,
+            after_pos_orders,
+            "Customer Account Validate must not create a PoS order",
+        )
         self._assert_invoiced_sale_order(after_orders[-1])

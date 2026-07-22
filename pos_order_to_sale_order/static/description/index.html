@@ -392,13 +392,17 @@ want.</li>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#configuration" id="toc-entry-1">Configuration</a></li>
-<li><a class="reference internal" href="#usage" id="toc-entry-2">Usage</a></li>
-<li><a class="reference internal" href="#development" id="toc-entry-3">Development</a></li>
-<li><a class="reference internal" href="#bug-tracker" id="toc-entry-4">Bug Tracker</a></li>
-<li><a class="reference internal" href="#credits" id="toc-entry-5">Credits</a><ul>
-<li><a class="reference internal" href="#authors" id="toc-entry-6">Authors</a></li>
-<li><a class="reference internal" href="#contributors" id="toc-entry-7">Contributors</a></li>
-<li><a class="reference internal" href="#maintainers" id="toc-entry-8">Maintainers</a></li>
+<li><a class="reference internal" href="#usage" id="toc-entry-2">Usage</a><ul>
+<li><a class="reference internal" href="#actions-create-order" id="toc-entry-3">Actions → Create Order</a></li>
+<li><a class="reference internal" href="#customer-account-validate-optional" id="toc-entry-4">Customer Account Validate (optional)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#development" id="toc-entry-5">Development</a></li>
+<li><a class="reference internal" href="#bug-tracker" id="toc-entry-6">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="toc-entry-7">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="toc-entry-8">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="toc-entry-9">Contributors</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-10">Maintainers</a></li>
 </ul>
 </li>
 </ul>
@@ -410,16 +414,23 @@ want.</li>
 <li>Enable the creation options you want under <strong>Sale Order Creation</strong>
 (draft / confirmed / delivered / invoiced)</li>
 <li>Optionally set <strong>Default Sale Order Creation</strong>:<ul>
-<li><strong>Ask</strong>: cashier chooses the state in a popup (default)</li>
+<li><strong>Ask</strong>: cashier chooses the state in the Actions → Create Order
+popup</li>
 <li><strong>Draft</strong> / <strong>Confirmed</strong> / <strong>Delivered</strong> / <strong>Invoiced</strong>: Create
 Order creates that sale order immediately without a popup</li>
 </ul>
 </li>
+<li>Optionally enable <strong>Create Sale Order on Customer Account Validate</strong>:
+pay fully with Customer Account and click Validate to create a sale
+order in the Default state (must not be Ask) and show a receipt. No
+Point of Sale order is saved.</li>
 </ul>
 <p><img alt="image_setting" src="https://raw.githubusercontent.com/OCA/pos/19.0/pos_order_to_sale_order/static/description/res_config_settings_form.png" /></p>
 </div>
 <div class="section" id="usage">
 <h2><a class="toc-backref" href="#toc-entry-2">Usage</a></h2>
+<div class="section" id="actions-create-order">
+<h3><a class="toc-backref" href="#toc-entry-3">Actions → Create Order</a></h3>
 <ul class="simple">
 <li>Open your Point of Sale</li>
 <li>Create a new order and select products</li>
@@ -451,15 +462,28 @@ invoice will be created and confirmed.</li>
 </ul>
 <p><img alt="image2" src="https://raw.githubusercontent.com/OCA/pos/19.0/pos_order_to_sale_order/static/description/pos_frontend_popup.png" /></p>
 </div>
+<div class="section" id="customer-account-validate-optional">
+<h3><a class="toc-backref" href="#toc-entry-4">Customer Account Validate (optional)</a></h3>
+<p>When <strong>Create Sale Order on Customer Account Validate</strong> is enabled and
+<strong>Default Sale Order Creation</strong> is a concrete state:</p>
+<ul class="simple">
+<li>Add products and select a customer</li>
+<li>Go to Payment, choose <strong>Customer Account</strong>, then <strong>Validate</strong></li>
+<li>A sale order is created in the default state and the receipt screen is
+shown (as for a normal PoS payment)</li>
+<li>No Point of Sale order is saved</li>
+</ul>
+</div>
+</div>
 <div class="section" id="development">
-<h2><a class="toc-backref" href="#toc-entry-3">Development</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-5">Development</a></h2>
 <ul class="simple">
 <li>Some prepare functions are available in the <tt class="docutils literal">sale.order</tt> model and
 <tt class="docutils literal">sale.order.line</tt> models to overload the creation of the sale order.</li>
 </ul>
 </div>
 <div class="section" id="bug-tracker">
-<h2><a class="toc-backref" href="#toc-entry-4">Bug Tracker</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-6">Bug Tracker</a></h2>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/pos/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
@@ -467,22 +491,22 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h2><a class="toc-backref" href="#toc-entry-5">Credits</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-7">Credits</a></h2>
 <div class="section" id="authors">
-<h3><a class="toc-backref" href="#toc-entry-6">Authors</a></h3>
+<h3><a class="toc-backref" href="#toc-entry-8">Authors</a></h3>
 <ul class="simple">
 <li>GRAP</li>
 </ul>
 </div>
 <div class="section" id="contributors">
-<h3><a class="toc-backref" href="#toc-entry-7">Contributors</a></h3>
+<h3><a class="toc-backref" href="#toc-entry-9">Contributors</a></h3>
 <ul class="simple">
 <li>Sylvain LE GAL (<a class="reference external" href="https://www.twitter.com/legalsylvain">https://www.twitter.com/legalsylvain</a>)</li>
 <li>Chau Le (<a class="reference external" href="mailto:chaulb&#64;trobz.com">chaulb&#64;trobz.com</a>)</li>
 </ul>
 </div>
 <div class="section" id="maintainers">
-<h3><a class="toc-backref" href="#toc-entry-8">Maintainers</a></h3>
+<h3><a class="toc-backref" href="#toc-entry-10">Maintainers</a></h3>
 <p>This module is maintained by the OCA.</p>
 <a class="reference external image-reference" href="https://odoo-community.org">
 <img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" />

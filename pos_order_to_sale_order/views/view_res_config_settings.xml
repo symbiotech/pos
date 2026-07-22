@@ -24,9 +24,16 @@
 
                     <setting
                         string="Default Sale Order Creation"
-                        help="When set to a specific state, Create Order creates that Sale Order immediately. Ask keeps the choice popup."
+                        help="When set to a specific state, Create Order creates that Sale Order immediately. Ask keeps the choice popup. Required (not Ask) when Customer Account Validate is enabled."
                     >
                         <field name="pos_iface_create_sale_order_default" />
+                    </setting>
+
+                    <setting
+                        string="Create Sale Order on Customer Account Validate"
+                        help="Pay fully with Customer Account and Validate to create a Sale Order in the Default state and show a receipt. No Point of Sale order is saved."
+                    >
+                        <field name="pos_iface_create_sale_order_on_validate" />
                     </setting>
                 </block>
             </xpath>

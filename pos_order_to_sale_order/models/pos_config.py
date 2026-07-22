@@ -68,7 +68,18 @@ class PosConfig(models.Model):
         required=True,
         help="If set to a specific state, the Create Order button creates a"
         " Sale Order in that state without asking. If set to Ask, the cashier"
-        " chooses the state in a popup.",
+        " chooses the state in a popup.\n"
+        "When Create Sale Order on Customer Account Validate is enabled,"
+        " Ask is not allowed and Validate uses this default state.",
+    )
+
+    iface_create_sale_order_on_validate = fields.Boolean(
+        string="Create Sale Order on Customer Account Validate",
+        default=False,
+        help="If checked, paying fully with Customer Account and clicking"
+        " Validate creates a Sale Order in the Default Sale Order Creation"
+        " state and shows a receipt. No Point of Sale order is saved."
+        " Default Sale Order Creation must not be Ask.",
     )
 
     @api.depends(
@@ -94,6 +105,7 @@ class PosConfig(models.Model):
         "iface_create_delivered_sale_order",
         "iface_create_invoiced_sale_order",
         "iface_create_sale_order_default",
+        "iface_create_sale_order_on_validate",
     )
     def _onchange_iface_create_sale_order_default(self):
         for config in self:
@@ -102,6 +114,20 @@ class PosConfig(models.Model):
             )
             if flag and not config[flag]:
                 config.iface_create_sale_order_default = "ask"
+            if (
+                config.iface_create_sale_order_on_validate
+                and config.iface_create_sale_order_default == "ask"
+            ):
+                config.iface_create_sale_order_default = (
+                    config._get_first_enabled_create_sale_order_state()
+                )
+
+    def _get_first_enabled_create_sale_order_state(self):
+        self.ensure_one()
+        for state, flag in _CREATE_SALE_ORDER_DEFAULT_FLAGS.items():
+            if self[flag]:
+                return state
+        return "ask"
 
     @api.constrains(
         "iface_create_draft_sale_order",
@@ -109,6 +135,7 @@ class PosConfig(models.Model):
         "iface_create_delivered_sale_order",
         "iface_create_invoiced_sale_order",
         "iface_create_sale_order_default",
+        "iface_create_sale_order_on_validate",
     )
     def _check_iface_create_sale_order_default(self):
         for config in self:
@@ -120,5 +147,15 @@ class PosConfig(models.Model):
                     self.env._(
                         "The default Sale Order Creation must match an enabled"
                         " creation option, or be set to Ask."
+                    )
+                )
+            if (
+                config.iface_create_sale_order_on_validate
+                and config.iface_create_sale_order_default == "ask"
+            ):
+                raise ValidationError(
+                    self.env._(
+                        "Default Sale Order Creation cannot be Ask when Create"
+                        " Sale Order on Customer Account Validate is enabled."
                     )
                 )

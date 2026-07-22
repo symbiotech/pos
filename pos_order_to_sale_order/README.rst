@@ -60,9 +60,15 @@ Configuration
   (draft / confirmed / delivered / invoiced)
 - Optionally set **Default Sale Order Creation**:
 
-  - **Ask**: cashier chooses the state in a popup (default)
+  - **Ask**: cashier chooses the state in the Actions → Create Order
+    popup
   - **Draft** / **Confirmed** / **Delivered** / **Invoiced**: Create
     Order creates that sale order immediately without a popup
+
+- Optionally enable **Create Sale Order on Customer Account Validate**:
+  pay fully with Customer Account and click Validate to create a sale
+  order in the Default state (must not be Ask) and show a receipt. No
+  Point of Sale order is saved.
 
 |image_setting|
 
@@ -70,6 +76,9 @@ Configuration
 
 Usage
 =====
+
+Actions → Create Order
+----------------------
 
 - Open your Point of Sale
 - Create a new order and select products
@@ -101,6 +110,18 @@ the PoS settings):
   invoice will be created and confirmed.
 
 |image2|
+
+Customer Account Validate (optional)
+------------------------------------
+
+When **Create Sale Order on Customer Account Validate** is enabled and
+**Default Sale Order Creation** is a concrete state:
+
+- Add products and select a customer
+- Go to Payment, choose **Customer Account**, then **Validate**
+- A sale order is created in the default state and the receipt screen is
+  shown (as for a normal PoS payment)
+- No Point of Sale order is saved
 
 .. |image1| image:: https://raw.githubusercontent.com/OCA/pos/19.0/pos_order_to_sale_order/static/description/pos_frontend_button.png
 .. |image2| image:: https://raw.githubusercontent.com/OCA/pos/19.0/pos_order_to_sale_order/static/description/pos_frontend_popup.png

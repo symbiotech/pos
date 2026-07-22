@@ -1,3 +1,5 @@
+## Actions → Create Order
+
 - Open your Point of Sale
 - Create a new order and select products
 - Select a customer
@@ -28,3 +30,14 @@ the PoS settings):
   invoice will be created and confirmed.
 
 ![](../static/description/pos_frontend_popup.png)
+
+## Customer Account Validate (optional)
+
+When **Create Sale Order on Customer Account Validate** is enabled and
+**Default Sale Order Creation** is a concrete state:
+
+- Add products and select a customer
+- Go to Payment, choose **Customer Account**, then **Validate**
+- A sale order is created in the default state and the receipt screen
+  is shown (as for a normal PoS payment)
+- No Point of Sale order is saved
