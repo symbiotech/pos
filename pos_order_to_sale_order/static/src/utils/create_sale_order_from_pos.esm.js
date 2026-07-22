@@ -37,16 +37,14 @@ export function shouldCreateSaleOrderOnValidate(config, order) {
     if (!payments.length) {
         return false;
     }
-    return payments.every(
-        (payment) => payment.payment_method_id?.type === "pay_later"
-    );
+    return payments.every((payment) => payment.payment_method_id?.type === "pay_later");
 }
 
 /**
  * Create a sale order from the current PoS order.
  *
  * @param {Object} options
- * @param {boolean} [options.removeOrder=true] Remove the PoS order after create.
+ * @param {Boolean} [options.removeOrder=true] Remove the PoS order after create.
  */
 export async function createSaleOrderFromPos(pos, orm, ui, orderState, options = {}) {
     const {removeOrder = true} = options;

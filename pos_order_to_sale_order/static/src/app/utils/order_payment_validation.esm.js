@@ -25,7 +25,7 @@ patch(OrderPaymentValidation.prototype, {
         const orderState = getDefaultCreateSaleOrderState(this.pos.config);
 
         try {
-            // ui.block is already held by shouldHideValidationBehindFeedbackScreen.
+            // Ui.block is already held by shouldHideValidationBehindFeedbackScreen.
             await this.pos.data.call("sale.order", "create_order_from_pos", [
                 order.serializeForORM({orm: true}),
                 orderState,
