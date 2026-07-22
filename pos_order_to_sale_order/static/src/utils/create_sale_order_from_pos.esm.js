@@ -30,7 +30,7 @@ export function shouldCreateSaleOrderOnValidate(config, order) {
     ) {
         return false;
     }
-    if (!order?.getPartner?.() || !order.getOrderlines?.()?.length) {
+    if (!order?.getPartner?.() || !order?.getOrderlines?.()?.length) {
         return false;
     }
     const payments = order.payment_ids || [];
