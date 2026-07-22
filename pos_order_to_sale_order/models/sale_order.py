@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import Command, api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import AccessError, UserError
 
 _POS_ACTION_CONFIG = {
     "draft": "iface_create_draft_sale_order",
@@ -108,6 +108,10 @@ class SaleOrder(models.Model):
 
     @api.model
     def create_order_from_pos(self, order_data, action):
+        if not self.env.user.has_group("point_of_sale.group_pos_user"):
+            raise AccessError(
+                self.env._("Only Point of Sale users can create sale orders from PoS.")
+            )
         if not order_data.get("partner_id"):
             raise UserError(
                 self.env._("A customer is required to create a sale order.")
