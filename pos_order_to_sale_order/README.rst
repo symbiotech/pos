@@ -32,20 +32,19 @@ PoS Order To Sale Order
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module extends the functionality of point of sale to allow sale
-orders creation from the Point of Sale.
+This module extends Point of Sale so cashiers can create sale orders
+from the POS UI, either via **Actions → Create Order** or by paying
+fully with **Customer Account**.
 
-In the POS UI, button has been added to create a sale order and discard
-the current POS order.
+Typical uses:
 
-This module is useful in many cases, for example:
+- take orders with a simple POS interface
+- deliver now and invoice later (for example monthly for regular
+  customers) while keeping stock correct
 
-- take orders with a very simple interface
-- if you have some customers that come every day in your shop, but want
-  to have a unique invoice at the end of the month. With that module,
-  you can create a sale order and deliver products every time to keep
-  your stock value correct, and to create a unique invoice, when you
-  want.
+It also adds a **Shop Sales (POS + Sale Orders)** report under Point of
+Sale → Reporting, so paid POS orders and sale orders created from PoS
+can be reviewed together for a day or range.
 
 **Table of contents**
 

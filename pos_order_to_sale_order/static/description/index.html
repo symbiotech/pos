@@ -375,19 +375,18 @@ ul.auto-toc {
 !! source digest: sha256:1f8b47887ce149548846500de8fa069fd378b1b821452c62a408ed284283fb58
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Production/Stable" src="https://img.shields.io/badge/maturity-Production%2FStable-green.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/license-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/pos/tree/19.0/pos_order_to_sale_order"><img alt="OCA/pos" src="https://img.shields.io/badge/github-OCA%2Fpos-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/pos-19-0/pos-19-0-pos_order_to_sale_order"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/pos&amp;target_branch=19.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>This module extends the functionality of point of sale to allow sale
-orders creation from the Point of Sale.</p>
-<p>In the POS UI, button has been added to create a sale order and discard
-the current POS order.</p>
-<p>This module is useful in many cases, for example:</p>
+<p>This module extends Point of Sale so cashiers can create sale orders
+from the POS UI, either via <strong>Actions → Create Order</strong> or by paying
+fully with <strong>Customer Account</strong>.</p>
+<p>Typical uses:</p>
 <ul class="simple">
-<li>take orders with a very simple interface</li>
-<li>if you have some customers that come every day in your shop, but want
-to have a unique invoice at the end of the month. With that module,
-you can create a sale order and deliver products every time to keep
-your stock value correct, and to create a unique invoice, when you
-want.</li>
+<li>take orders with a simple POS interface</li>
+<li>deliver now and invoice later (for example monthly for regular
+customers) while keeping stock correct</li>
 </ul>
+<p>It also adds a <strong>Shop Sales (POS + Sale Orders)</strong> report under Point of
+Sale → Reporting, so paid POS orders and sale orders created from PoS
+can be reviewed together for a day or range.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
