@@ -43,7 +43,7 @@ Typical uses:
   customers) while keeping stock correct
 
 It also adds a **Shop Sales (POS + Sale Orders)** report under Point of
-Sale → Reporting, so paid POS orders and sale orders created from PoS
+Sale → Orders, so paid POS orders and sale orders created from PoS
 can be reviewed together for a day or range. Matching totals appear on
 the PoS Sessions list (**Shop Sales Amount** / **Shop Sales Count**).
 
@@ -142,7 +142,7 @@ On Sales → Orders / Quotations:
 Daily shop sales
 ----------------
 
-Point of Sale → Reporting → **Shop Sales (POS + Sale Orders)** shows
+Point of Sale → Orders → **Shop Sales (POS + Sale Orders)** shows
 paid PoS orders and sale orders created from PoS in one list (default
 filter: today). Use the pivot/graph views to total by day or source.
 Open a row to jump to the related PoS order or sale order.
