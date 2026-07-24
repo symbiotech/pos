@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_pos_session_tree" model="ir.ui.view">
+        <field name="name">pos.session.list.inherit.pos_order_to_sale_order</field>
+        <field name="model">pos.session</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_session_tree" />
+        <field name="arch" type="xml">
+            <field name="stop_at" position="after">
+                <field name="currency_id" column_invisible="1" />
+                <field name="shop_sale_amount_total" optional="show" />
+                <field name="shop_sale_order_count" optional="show" />
+            </field>
+        </field>
+    </record>
+</odoo>

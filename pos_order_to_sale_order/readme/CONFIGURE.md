@@ -1,0 +1,14 @@
+- Go to Point Of Sale / Configuration / Point of Sale
+- Enable the creation options you want under **Sale Order Creation**
+  (draft / confirmed / delivered / invoiced)
+- Optionally set **Default Sale Order Creation**:
+  - **Ask**: cashier chooses the state in the Actions → Create Order popup
+  - **Draft** / **Confirmed** / **Delivered** / **Invoiced**: Create
+    Order creates that sale order immediately without a popup
+- Optionally enable **Create Sale Order when paying with Customer
+  Account**: pay fully with Customer Account to create a sale order in
+  the Default state (must not be Ask) and show a receipt. No Point of
+  Sale order is saved. The Actions → **Create Order** button is hidden
+  so staff only use Customer Account payment.
+
+![image_setting](../static/description/res_config_settings_form.png)
