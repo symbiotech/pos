@@ -4,17 +4,16 @@
         <field name="name">pos.shop.sale.report.list</field>
         <field name="model">pos.shop.sale.report</field>
         <field name="arch" type="xml">
-            <list create="false" edit="false" delete="false">
+            <list
+                create="false"
+                edit="false"
+                delete="false"
+                action="action_open_document"
+                type="object"
+            >
                 <field name="date_order" />
                 <field name="source" />
                 <field name="name" />
-                <button
-                    name="action_open_document"
-                    type="object"
-                    string="Open"
-                    icon="fa-external-link"
-                    title="Open Document"
-                />
                 <field name="partner_id" />
                 <field name="user_id" optional="show" />
                 <field name="pos_session_id" optional="show" />
