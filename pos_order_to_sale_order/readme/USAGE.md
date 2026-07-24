@@ -62,3 +62,7 @@ Point of Sale → Reporting → **Shop Sales (POS + Sale Orders)** shows
 paid PoS orders and sale orders created from PoS in one list (default
 filter: today). Use the pivot/graph views to total by day or source.
 Open a row to jump to the related PoS order or sale order.
+
+On Point of Sale → Orders → **Sessions**, the list also shows
+**Shop Sales Amount** and **Shop Sales Count** (paid PoS orders plus
+non-cancelled sale orders linked to each session).

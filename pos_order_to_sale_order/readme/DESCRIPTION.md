@@ -10,4 +10,5 @@ Typical uses:
 
 It also adds a **Shop Sales (POS + Sale Orders)** report under Point of
 Sale → Reporting, so paid POS orders and sale orders created from PoS can
-be reviewed together for a day or range.
+be reviewed together for a day or range. Matching totals appear on the
+PoS Sessions list (**Shop Sales Amount** / **Shop Sales Count**).

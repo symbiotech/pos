@@ -44,7 +44,8 @@ Typical uses:
 
 It also adds a **Shop Sales (POS + Sale Orders)** report under Point of
 Sale → Reporting, so paid POS orders and sale orders created from PoS
-can be reviewed together for a day or range.
+can be reviewed together for a day or range. Matching totals appear on
+the PoS Sessions list (**Shop Sales Amount** / **Shop Sales Count**).
 
 **Table of contents**
 
@@ -145,6 +146,10 @@ Point of Sale → Reporting → **Shop Sales (POS + Sale Orders)** shows
 paid PoS orders and sale orders created from PoS in one list (default
 filter: today). Use the pivot/graph views to total by day or source.
 Open a row to jump to the related PoS order or sale order.
+
+On Point of Sale → Orders → **Sessions**, the list also shows **Shop
+Sales Amount** and **Shop Sales Count** (paid PoS orders plus
+non-cancelled sale orders linked to each session).
 
 .. |image1| image:: https://raw.githubusercontent.com/OCA/pos/19.0/pos_order_to_sale_order/static/description/pos_frontend_button.png
 .. |image2| image:: https://raw.githubusercontent.com/OCA/pos/19.0/pos_order_to_sale_order/static/description/pos_frontend_popup.png

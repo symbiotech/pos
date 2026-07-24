@@ -150,3 +150,40 @@ class TestUi(TestPointOfSaleHttpCommon):
             "Paying with Customer Account must not create a PoS order",
         )
         self._assert_invoiced_sale_order(after_orders[-1])
+
+    def test_shop_sale_session_totals(self):
+        self.main_pos_config.with_user(self.pos_user).open_ui()
+        session = self.main_pos_config.current_session_id
+        self.assertEqual(session.shop_sale_order_count, 0)
+        self.assertEqual(session.shop_sale_amount_total, 0.0)
+
+        sale_order = self.env["sale.order"].create(
+            {
+                "partner_id": self.pos_partner.id,
+                "pos_session_id": session.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.whiteboard_pen.id,
+                            "product_uom_qty": 2,
+                        },
+                    )
+                ],
+            }
+        )
+        session.invalidate_recordset(
+            ["shop_sale_order_count", "shop_sale_amount_total"]
+        )
+        self.assertEqual(session.shop_sale_order_count, 1)
+        self.assertAlmostEqual(
+            session.shop_sale_amount_total, sale_order.amount_total, places=2
+        )
+
+        sale_order.action_cancel()
+        session.invalidate_recordset(
+            ["shop_sale_order_count", "shop_sale_amount_total"]
+        )
+        self.assertEqual(session.shop_sale_order_count, 0)
+        self.assertEqual(session.shop_sale_amount_total, 0.0)
