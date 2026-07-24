@@ -157,7 +157,8 @@ class TestUi(TestPointOfSaleHttpCommon):
         self.assertEqual(session.shop_sale_order_count, 0)
         self.assertEqual(session.shop_sale_amount_total, 0.0)
 
-        sale_order = self.env["sale.order"].create(
+        # PoS users lack Sales ACLs; production create_order_from_pos uses sudo.
+        sale_order = self.env["sale.order"].sudo().create(
             {
                 "partner_id": self.pos_partner.id,
                 "pos_session_id": session.id,
