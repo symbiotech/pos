@@ -14,6 +14,13 @@
                 <field name="date_order" />
                 <field name="source" />
                 <field name="name" />
+                <button
+                    name="action_open_document"
+                    type="object"
+                    icon="fa-external-link"
+                    title="Open Document"
+                    aria-label="Open Document"
+                />
                 <field name="partner_id" />
                 <field name="user_id" optional="show" />
                 <field name="pos_session_id" optional="show" />
